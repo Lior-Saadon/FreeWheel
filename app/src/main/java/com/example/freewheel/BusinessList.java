@@ -8,22 +8,32 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SearchView;
+
+import com.android.volley.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessList extends Fragment implements ImageButton.OnClickListener {
 
-    private List<Business> businessList = new ArrayList<>();
-    private SearchView searchView;
+    private List<GoogleInfo> businessList = new ArrayList<>();
     private RecyclerView recyclerView;
     private BusinessRecyclerAdapter adapter;
+    private EditText search_bar;
     private ImageButton addPlace;
+
+    private Button search;
 
     @Nullable
     @Override
@@ -38,11 +48,39 @@ public class BusinessList extends Fragment implements ImageButton.OnClickListene
 
     private void handlingRecycleViewer(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        search_bar = (EditText) view.findViewById(R.id.input_search);
+
+        search = (Button) view.findViewById(R.id.search);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Requests r = Requests.getInstance(getContext());
+                r.locationRequest(search_bar.getText().toString(), new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            businessList.clear();
+                            adapter.notifyDataSetChanged();
+                            System.out.println(response.toString());
+                            JSONArray arr = response.getJSONArray("results");
+                            for (int i = 0; i < arr.length(); i++) {
+                                businessList.add(new GoogleInfo(arr.getJSONObject(i), getContext(), adapter));
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+            }
+        });
+
+
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         adapter = new BusinessRecyclerAdapter(businessList, new BusinessRecyclerAdapter.OnItemClickListener() {
-            @Override public void onItemClick(Business business) {
+            @Override public void onItemClick(GoogleInfo business) {
                 BusinessPageFragment.businessToDisplay = business;
                 loadBusinessPageFragment();
             }

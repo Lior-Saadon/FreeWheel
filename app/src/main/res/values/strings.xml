@@ -7,4 +7,7 @@
     <string name="places_api_url">https://maps.googleapis.com/maps/api/place/textsearch/json?</string>
     <string name="places_api_key">AIzaSyC6fhPFwmwkD7BCPw4ywEdn5j33K3stmQY</string>
     <string name="location">31.7771585,35.1964247</string>
+    <string name="photo_api_utl">https://maps.googleapis.com/maps/api/place/photo?</string>
+    <string name="image_size">150</string>
+
 </resources>
