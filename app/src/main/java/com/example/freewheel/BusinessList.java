@@ -12,26 +12,31 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusinessList extends Fragment implements SearchView.OnQueryTextListener {
+public class BusinessList extends Fragment implements ImageButton.OnClickListener {
 
     private List<Business> businessList = new ArrayList<>();
+    private SearchView searchView;
     private RecyclerView recyclerView;
     private BusinessRecyclerAdapter adapter;
-    private SearchView searchView;
+    private ImageButton addPlace;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_outer, container, false);
+
+        handlingRecycleViewer(view);
+
+        return view;
+    }
 
 
-        handlingSearchView(view);
-
-        /* handling recycleViewer */
+    private void handlingRecycleViewer(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -44,18 +49,9 @@ public class BusinessList extends Fragment implements SearchView.OnQueryTextList
         });
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        return view;
     }
 
 
-
-    private void handlingSearchView(View view) {
-        searchView = (SearchView) view.findViewById(R.id.search_bar);
-        CharSequence query = searchView.getQuery(); // get the query string currently in the text field
-        searchView.setQueryHint("Where do you wanna go?");
-        searchView.setOnQueryTextListener(this);
-    }
 
     /**
      * this function replaces the layout to a book page layout in case some book was clicked in the list
@@ -70,17 +66,13 @@ public class BusinessList extends Fragment implements SearchView.OnQueryTextList
 
 
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return true;
-    }
+
+
 
     @Override
-    public boolean onQueryTextChange(String place) {
-        adapter.filter(place);
-        return true;
+    public void onClick(View v) {
+        /* when + button is clicked */
+
+
     }
-
-
-
 }

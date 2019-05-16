@@ -3,33 +3,32 @@ import android.widget.ImageView;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Business {
 
-    private String name, adrress;
-    private Boolean standardMark;
+    private String name, id, address;
+    private Boolean accessibilityStandard;       //TavTeken Negishut
     private LatLng location;
-    private ImageView logo;
-    //private Comment[] commengts;
+    private int logo;
+    private ArrayList<Comment> comments;
     private float crossingWidth;
-    private int hight;
-    private float decline;
+    private int height;
+    private float incline;              //shipua
     private int numOfRaters, sumOfRates;
     private float rate;
 
 
-
-    Business(String name, String adrress, LatLng location, ImageView logo){
+    Business(String name, String adrress, LatLng location, int logo){
         this.name = name;
-        this.adrress = adrress;
+        this.address = adrress;
         this.location = location;
         this.logo = logo;
         this.numOfRaters = 0;
         this.sumOfRates = 0;
         this.rate = 0;
     }
-
 
     void addRate(int rate){
         if (0 > rate || rate > 5){
@@ -40,13 +39,13 @@ public class Business {
         rate = sumOfRates / numOfRaters;
     }
 
-    public void setStandardMark(boolean standardMark) {
+    public void setAccessibilityStandard(boolean accessibilityStandard) {
         Scanner input = new Scanner(System.in);
         System.out.println("Is this business has a standard mark?");
-        System.out.println("0 = Yes , 1 = No, 2 = I don't know");
+        System.out.println("0 = Yes , img1 = No, img2 = I don't know");
 
         int answer = input.nextInt();
-        this.standardMark = standardMark;
+        this.accessibilityStandard = accessibilityStandard;
     }
 
     public void setCrossingWidth(float crossingWidth) {
@@ -54,7 +53,7 @@ public class Business {
     }
 
     public void setHight(int hight) {
-        this.hight = hight;
+        this.height = hight;
     }
 
     public String getName() {
@@ -62,18 +61,18 @@ public class Business {
     }
 
     public String getAdrress() {
-        return adrress;
+        return address;
     }
 
-    public Boolean getStandardMark() {
-        return standardMark;
+    public Boolean getAccessibilityStandard() {
+        return accessibilityStandard;
     }
 
     public LatLng getLocation() {
         return location;
     }
 
-    public ImageView getLogo() {
+    public int getLogo() {
         return logo;
     }
 
@@ -82,11 +81,11 @@ public class Business {
     }
 
     public int getHight() {
-        return hight;
+        return height;
     }
 
-    public float getDecline() {
-        return decline;
+    public float getIncline() {
+        return incline;
     }
 
     public int getNumOfRaters() {
