@@ -80,6 +80,7 @@ public class BusinessList extends Fragment implements ImageButton.OnClickListene
         recyclerView.setLayoutManager(mLayoutManager);
         adapter = new BusinessRecyclerAdapter(businessList, new BusinessRecyclerAdapter.OnItemClickListener() {
             @Override public void onItemClick(GoogleInfo business) {
+
                 BusinessPageFragment.businessToDisplay = business;
                 loadBusinessPageFragment();
             }
@@ -90,9 +91,7 @@ public class BusinessList extends Fragment implements ImageButton.OnClickListene
 
 
 
-    /**
-     * this function replaces the layout to a book page layout in case some book was clicked in the list
-     */
+
     private void loadBusinessPageFragment() {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

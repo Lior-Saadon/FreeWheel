@@ -73,39 +73,6 @@ public class ServerApi {
     }
 
 
-//    public void setAccess(String busid, String key, Object val){
-//
-//        DocumentReference busRef = db.collection(LOC_LIB_NAME).document(busid);
-//        busRef.update("access", Map)
-//        busRef.update("comments", FieldValue.arrayUnion(comment));
-//
-//    }
-//
-//    public void getBus(String busid){
-//
-//        DocumentReference docRef = db.collection(LOC_LIB_NAME).document(busid);
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-//                    } else {
-//                        Log.d(TAG, "No such document");
-//                    }
-//                } else {
-//                    Log.d(TAG, "get failed with ", task.getException());
-//                }
-//            }
-//        });
-//
-//
-//
-//        return bus;
-//    }
-
-
     public void setAccess(String busid, final String key, final Object val){
 
         final DocumentReference busRef = db.collection(LOC_LIB_NAME).document(busid);
@@ -138,6 +105,73 @@ public class ServerApi {
                 });
 
     }
+
+    public HashMap<String, Object> getAccessibilities(String busid){
+        final DocumentReference busRef = db.collection(LOC_LIB_NAME).document(busid);
+
+        final HashMap<String, Object> newMap = new HashMap<>();
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(busRef);
+
+                // Note: this could be done without a transaction
+                //       by updating the population using FieldValue.increment()
+                newMap.putAll((HashMap<String, Object>)snapshot.get("access"));
+
+
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Transaction success!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Transaction failure.", e);
+                    }
+                });
+
+        return newMap;
+    }
+
+    public ArrayList<Comment> getComments(String busid){
+        final DocumentReference busRef = db.collection(LOC_LIB_NAME).document(busid);
+
+        final ArrayList<Comment> arr = new ArrayList<>();
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(busRef);
+
+                // Note: this could be done without a transaction
+                //       by updating the population using FieldValue.increment()
+                arr.addAll(( ArrayList<Comment>)snapshot.get("comments"));
+
+
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Transaction success!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Transaction failure.", e);
+                    }
+                });
+
+        return arr;
+    }
+
 
 
 }

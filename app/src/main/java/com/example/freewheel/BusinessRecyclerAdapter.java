@@ -63,7 +63,6 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
         notifyDataSetChanged();
     }
 
-    //--------------------------------------
 
 
     static class MyViewHolder extends RecyclerView.ViewHolder {

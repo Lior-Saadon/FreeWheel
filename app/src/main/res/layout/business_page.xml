@@ -17,6 +17,7 @@
         android:rowCount="15">
 
         <ImageView
+            android:id="@+id/place_photo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
@@ -35,16 +36,6 @@
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/place_description"
-                android:layout_marginStart="30dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="a short description"
-                android:textColor="@color/grey"
-                android:textSize="18sp"
-                tools:layout_marginStart="30dp" />
-
-            <TextView
                 android:id="@+id/place_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +46,7 @@
                 android:textSize="18sp" />
 
             <LinearLayout
+                android:id="@+id/standad_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
@@ -79,6 +71,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wheelchair_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
@@ -103,6 +96,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/parking_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
