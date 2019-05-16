@@ -5,9 +5,10 @@ import android.widget.ImageView;
 //import com.google.android.gms.maps.model.LatLng;
 import com.google.type.LatLng;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Business {
 

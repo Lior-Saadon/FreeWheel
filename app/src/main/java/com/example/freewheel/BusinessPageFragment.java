@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class BusinessPageFragment extends Fragment {
 
-    public static Business businessToDisplay = null;
+    public static GoogleInfo businessToDisplay = null;
 
     private ImageView logo;
     private TextView name, address;
