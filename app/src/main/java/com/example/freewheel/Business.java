@@ -14,7 +14,6 @@ public class Business {
     private String id;
 
     private int numOfRaters, sumOfRates;
-    private float rate;
 
     private ArrayList<Comment> comments;
     private HashMap<String, Object> access;
@@ -23,10 +22,18 @@ public class Business {
     Business(String id){
         this.numOfRaters = 0;
         this.sumOfRates = 0;
-        this.rate = 0;
+
         this.id = id;
         access = new HashMap<>();
-        //todo - add values to hashmap
+        access.put("here", true);
+        access.put("there", false);
+        access.put("bum", 3);
+        comments = new ArrayList<>();
+
+        comments.add(new Comment("baaba", 2, null));
+        comments.add(new Comment("asfa", 1, null));
+        comments.add(new Comment("mama", 3, null));
+
     }
 
 
@@ -51,9 +58,6 @@ public class Business {
         return sumOfRates;
     }
 
-    public float getRate() {
-        return rate;
-    }
 
     public String getId() {
         return this.id;
