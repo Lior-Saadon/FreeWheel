@@ -58,37 +58,40 @@
 
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="120dp"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/bg_tags_rounded"
-                        android:gravity="center_horizontal"
+                        android:gravity="center_horizontal|center_vertical"
                         android:popupElevation="1dp"
                         android:text="Wheel Chair"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12dp" />
+                        android:textSize="12sp"
+                        tools:gravity="center" />
 
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="120dp"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/bg_tags_rounded"
-                        android:gravity="center_horizontal"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="Wide Entrance"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12dp" />
+                        android:textSize="12sp"
+                        tools:gravity="center" />
 
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="80dp"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/bg_tags_rounded"
-                        android:gravity="center_horizontal"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="Elevator"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12dp" />
+                        android:textSize="12sp"
+                        tools:gravity="center" />
 
                 </LinearLayout>
 
@@ -101,36 +104,39 @@
 
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="80dp"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/bg_tags_rounded"
-                        android:gravity="center_horizontal"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="No Stairs"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12dp" />
+                        android:textSize="12sp"
+                        tools:gravity="center" />
 
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="120dp"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/bg_tags_rounded"
-                        android:gravity="center_horizontal"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="Accessible Way"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12dp" />
+                        android:textSize="12sp"
+                        tools:gravity="center" />
 
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="120dp"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/bg_tags_rounded"
-                        android:gravity="center_horizontal"
+                        android:gravity="center_horizontal|center_vertical"
                         android:text="Close Parking"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12dp" />
+                        android:textSize="12sp"
+                        tools:gravity="center" />
 
 
                 </LinearLayout>
@@ -146,7 +152,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginStart="20dp"
-                        android:background="@drawable/img8"
+                        android:background="@drawable/img2"
                         android:scaleType="centerCrop" />
 
                     <ImageButton
@@ -165,7 +171,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/img2" />
+                        android:background="@drawable/img8" />
 
                     <ImageButton
                         android:layout_width="60dp"
