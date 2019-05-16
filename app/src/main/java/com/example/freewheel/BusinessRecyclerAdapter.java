@@ -14,14 +14,14 @@ import java.util.List;
 public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecyclerAdapter.MyViewHolder> {
 
     public interface OnItemClickListener {
-        void onItemClick(Business business);
+        void onItemClick(GoogleInfo business);
     }
 
-    private final List<Business> businessList, copyList;
+    private final List<GoogleInfo> businessList, copyList;
     private final OnItemClickListener mListener;
 
 
-    public BusinessRecyclerAdapter(List<Business> list, OnItemClickListener listener) {
+    public BusinessRecyclerAdapter(List<GoogleInfo> list, OnItemClickListener listener) {
         this.businessList = list;
         this.mListener = listener;
         this.copyList = new ArrayList<>();
@@ -55,7 +55,7 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
             businessList.addAll(copyList);
             return;
         }
-        for(Business business: copyList) {
+        for(GoogleInfo business: copyList) {
             if(business.getName().toLowerCase().contains(queryText.toLowerCase())) {
                businessList.add(business);
             }
@@ -63,7 +63,6 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
         notifyDataSetChanged();
     }
 
-    //--------------------------------------
 
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -80,10 +79,12 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
             logo = (ImageView) view.findViewById(R.id.logo);
         }
 
-        public void bind(final Business business, final OnItemClickListener listener) {
+        public void bind(final GoogleInfo business, final OnItemClickListener listener) {
             name.setText(business.getName());
-            address.setText(business.getAdrress());
-            logo.setImageResource(business.getLogo());
+            address.setText(business.getAddress());
+            if(business.getImage() != null) {
+                logo.setImageBitmap(business.getImage());
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View view) {
                     listener.onItemClick(business);
