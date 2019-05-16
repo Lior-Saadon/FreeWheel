@@ -1,34 +1,41 @@
 package com.example.freewheel;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-import com.google.android.gms.maps.model.LatLng;
+//import com.google.android.gms.maps.model.LatLng;
+import com.google.type.LatLng;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Business {
 
-    private String name, id, address;
-    private Boolean accessibilityStandard;       //TavTeken Negishut
-    private LatLng location;
-    private int logo;
-    private ArrayList<Comment> comments;
-    private float crossingWidth;
-    private int height;
-    private float incline;              //shipua
+    private String id;
+
     private int numOfRaters, sumOfRates;
-    private float rate;
+
+    private ArrayList<Comment> comments;
+    private HashMap<String, Object> access;
 
 
-    Business(String name, String adrress, LatLng location, int logo){
-        this.name = name;
-        this.address = adrress;
-        this.location = location;
-        this.logo = logo;
+    Business(String id){
         this.numOfRaters = 0;
         this.sumOfRates = 0;
-        this.rate = 0;
+
+        this.id = id;
+        access = new HashMap<>();
+        access.put("here", true);
+        access.put("there", false);
+        access.put("bum", 3);
+        comments = new ArrayList<>();
+
+        comments.add(new Comment("baaba", 2, null));
+        comments.add(new Comment("asfa", 1, null));
+        comments.add(new Comment("mama", 3, null));
+
     }
+
 
     void addRate(int rate){
         if (0 > rate || rate > 5){
@@ -39,53 +46,8 @@ public class Business {
         rate = sumOfRates / numOfRaters;
     }
 
-    public void setAccessibilityStandard(boolean accessibilityStandard) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Is this business has a standard mark?");
-        System.out.println("0 = Yes , img1 = No, img2 = I don't know");
-
-        int answer = input.nextInt();
-        this.accessibilityStandard = accessibilityStandard;
-    }
-
-    public void setCrossingWidth(float crossingWidth) {
-        this.crossingWidth = crossingWidth;
-    }
-
-    public void setHight(int hight) {
-        this.height = hight;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAdrress() {
-        return address;
-    }
-
-    public Boolean getAccessibilityStandard() {
-        return accessibilityStandard;
-    }
-
-    public LatLng getLocation() {
-        return location;
-    }
-
-    public int getLogo() {
-        return logo;
-    }
-
-    public float getCrossingWidth() {
-        return crossingWidth;
-    }
-
-    public int getHight() {
-        return height;
-    }
-
-    public float getIncline() {
-        return incline;
+    public HashMap<String, Object> getAccess() {
+        return access;
     }
 
     public int getNumOfRaters() {
@@ -96,7 +58,12 @@ public class Business {
         return sumOfRates;
     }
 
-    public float getRate() {
-        return rate;
+
+    public String getId() {
+        return this.id;
+    }
+
+    public ArrayList<Comment> getComments(){
+        return this.comments;
     }
 }

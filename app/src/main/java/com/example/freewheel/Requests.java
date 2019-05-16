@@ -33,7 +33,9 @@ public class Requests {
     public void locationRequest(String searchBar, Response.Listener<JSONObject> res)
     {
         String url = _context.getResources().getString(R.string.places_api_url);
-        url += "&input=" + searchBar;
+        url += "&query=" + searchBar;
+        url += "&radius=2000";      //2km
+        url += "&location=" + _context.getResources().getString(R.string.location);
         url += "&key=" + _context.getResources().getString(R.string.places_api_key);
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, res,
                 new Response.ErrorListener() {
