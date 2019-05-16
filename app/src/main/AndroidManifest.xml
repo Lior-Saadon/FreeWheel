@@ -40,10 +40,6 @@
             android:name="android.support.VERSION"
             android:value="28.0.0" />
 
-        <!--&lt;!&ndash; App's Google Play Version&ndash;&gt;-->
-        <!--<meta-data-->
-            <!--android:name="com.google.android.gms.version"-->
-            <!--android:value="12451000" />-->
 
         <!-- App's Android maps-key-->
         <meta-data
