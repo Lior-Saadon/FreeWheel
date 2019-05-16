@@ -2,7 +2,6 @@
     <string name="app_name">FreeWheel</string>
     <string name="action_settings">Settings</string>
     <string name="where_do_you_wanna_go">"      "Where do you wanna go?</string>
-    <string name="elevator" />
 
     <string name="places_api_url">https://maps.googleapis.com/maps/api/place/textsearch/json?</string>
     <string name="places_api_key">AIzaSyC6fhPFwmwkD7BCPw4ywEdn5j33K3stmQY</string>
@@ -10,4 +9,12 @@
     <string name="photo_api_utl">https://maps.googleapis.com/maps/api/place/photo?</string>
     <string name="image_size">150</string>
 
+
+    <string name="elevators">Elevator</string>
+    <string name="accessible_way">Accessible Way</string>
+    <string name="accessibility_standard">Accessibility Standard</string>
+    <string name="no_stairs">No Stairs</string>
+    <string name="close_parking">Close Parking</string>
+    <string name="wheelchair">Wheelchair Accessible</string>
+    <string name="wide_door">Wide Door</string>
 </resources>

@@ -32,8 +32,19 @@
                 android:layout_margin="30dp"
                 android:layout_marginBottom="15dp"
                 android:text="Name of Place"
+                android:textAppearance="bold"
                 android:textColor="@color/dark_grey"
                 android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/place_description"
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="a short description"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                tools:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/place_address"

@@ -3,7 +3,6 @@
     <color name="colorPrimary">#d9b3ff</color>
 
     <color name="colorPrimaryDark">#6343DD</color>
-
     <color name="grey">#666666</color>
 
     <color name="dark_grey">#333333</color>
@@ -13,6 +12,5 @@
     <color name="divider_grey">#D3D3D3</color>
 
     <color name="white">#FFFFFF</color>
-
     <color name="colorAccent">#000000</color>
 </resources>
