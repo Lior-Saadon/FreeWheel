@@ -62,7 +62,6 @@ public class BusinessList extends Fragment implements ImageButton.OnClickListene
                         try {
                             businessList.clear();
                             adapter.notifyDataSetChanged();
-                            System.out.println(response.toString());
                             JSONArray arr = response.getJSONArray("results");
                             for (int i = 0; i < arr.length(); i++) {
                                 businessList.add(new GoogleInfo(arr.getJSONObject(i), getContext(), adapter));
