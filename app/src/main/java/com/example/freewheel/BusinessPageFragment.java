@@ -50,7 +50,18 @@ public class BusinessPageFragment extends Fragment {
             address.setText(businessToDisplay.getAddress());
             logo.setImageBitmap(businessToDisplay.getImage());
             id = businessToDisplay.getId();
-            setAccessAtts();
+
+            if (ServerApi.getInstance().exists(id)) {
+
+                HashMap<String, Object> atts = ServerApi.getInstance().getAccessibilities(id);
+
+                try {
+                    wait(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                setAccessAtts(atts);
+            }
 
         }
 
@@ -58,34 +69,34 @@ public class BusinessPageFragment extends Fragment {
     }
 
 
-    private void setAccessAtts(){
-        HashMap<String, Object> atts = ServerApi.getInstance().getAccessibilities(id);
-        if ((Boolean)atts.get("Standard")){
-            standard.setImageResource(R.drawable.v);
-        } else {
-            standard.setImageResource(R.drawable.x);
-        }
-        if ((Boolean)atts.get("WheelChair accessibility")){
-            wheel.setImageResource(R.drawable.v);
-        } else {
-            wheel.setImageResource(R.drawable.x);
-        }
+    private void setAccessAtts(HashMap<String, Object> atts){
+        if (atts != null) {
+            if ((Boolean) atts.get("Standard")) {
+                standard.setImageResource(R.drawable.v);
+            } else {
+                standard.setImageResource(R.drawable.x);
+            }
+            if ((Boolean) atts.get("WheelChair accessibility")) {
+                wheel.setImageResource(R.drawable.v);
+            } else {
+                wheel.setImageResource(R.drawable.x);
+            }
 
-        if ((Boolean)atts.get("Close parking")){
-            parking.setImageResource(R.drawable.v);
-        } else {
-            parking.setImageResource(R.drawable.x);
+            if ((Boolean) atts.get("Close parking")) {
+                parking.setImageResource(R.drawable.v);
+            } else {
+                parking.setImageResource(R.drawable.x);
+            }
+
+            if ((Boolean) atts.get("Elevator")) {
+                elav.setImageResource(R.drawable.v);
+            } else {
+                elav.setImageResource(R.drawable.x);
+            }
+            doors.setText((String) atts.get("Doors width") + "cm");
+            stairs.setText((String) atts.get("Number of Stairs"));
+
         }
-
-        if ((Boolean)atts.get("Elevator")){
-            elav.setImageResource(R.drawable.v);
-        } else {
-            elav.setImageResource(R.drawable.x);
-        }
-        doors.setText((String)atts.get("Doors width") + "cm");
-        stairs.setText((String)atts.get("Number of Stairs"));
-
-
 
 
     }

@@ -2,6 +2,7 @@ package com.example.freewheel;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -106,6 +107,40 @@ public class ServerApi {
 
     }
 
+
+    public void setMulAccess(String busid, final HashMap<String, Object> map){
+
+        final DocumentReference busRef = db.collection(LOC_LIB_NAME).document(busid);
+
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(busRef);
+
+                // Note: this could be done without a transaction
+                //       by updating the population using FieldValue.increment()
+                HashMap<String, Object> newMap = (HashMap<String, Object>)snapshot.get("access");
+                newMap.putAll(map);
+                transaction.update(busRef, "access", newMap);
+
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Transaction success!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Transaction failure.", e);
+                    }
+                });
+
+    }
+
     public HashMap<String, Object> getAccessibilities(String busid){
         final DocumentReference busRef = db.collection(LOC_LIB_NAME).document(busid);
 
@@ -172,6 +207,28 @@ public class ServerApi {
         return arr;
     }
 
+    public boolean exists(String bid){
+        final Boolean[] res = new Boolean[1];
+        db.collection(LOC_LIB_NAME)
+                .document(bid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().exists()) {
+                                res[0] = true;
+                            } else {
+                                res[0] = false;
+                            }
+                        } else {
+                            res[0] = false;
+                        }
+                    }
+                });
+        
 
+        return res[0];
+    }
 
 }
