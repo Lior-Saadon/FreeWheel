@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_layout);
 
         loadFragment(new BusinessList());
-
+        init();
     }
 
     public void loadFragment(Fragment fragment) {
@@ -46,10 +46,19 @@ public class MainActivity extends AppCompatActivity {
         ServerApi.getInstance().setAccess(id, toSend);
 
 
-        /*for (String arg : toSend.keySet()){
-            ServerApi.getInstance().setAccess(id,
-                    arg, toSend.get(arg));
-        }*/
+        HashMap<String, Object> toSend2 = new HashMap<>();
+        toSend2.put("Standard", false);
+        toSend2.put("WheelChair accessibility", true);
+        toSend2.put("Close parking", false);
+        toSend2.put("Elevator", false);
+        toSend2.put("Doors width", 100);
+        toSend2.put("Number of Stairs", 3);
+
+        String id2 = "ChIJeUOgtI_VHBURwnW3y_Rau8Q";
+
+        /* givat ram hebrew university id*/
+        ServerApi.getInstance().createLocation(new Business(id2));
+        ServerApi.getInstance().setAccess(id2, toSend2);
 
 
     }

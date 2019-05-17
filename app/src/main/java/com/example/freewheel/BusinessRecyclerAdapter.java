@@ -18,6 +18,7 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
     }
 
     private final List<GoogleInfo> businessList, copyList;
+
     private final OnItemClickListener mListener;
 
 
