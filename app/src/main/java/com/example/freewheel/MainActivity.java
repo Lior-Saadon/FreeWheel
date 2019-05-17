@@ -34,18 +34,22 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, Object> toSend = new HashMap<>();
         toSend.put("Standard", true);
         toSend.put("WheelChair accessibility", true);
-        toSend.put("Close parking", true);
-        toSend.put("Elevator", true);
+        toSend.put("Close parking", false);
+        toSend.put("Elevator", false);
         toSend.put("Doors width", 80);
         toSend.put("Number of Stairs", 30);
 
-        /* givat ram hebrew university id*/
-        ServerApi.getInstance().createLocation(new Business("ChIJS_zBNNbXAhUR_A-4iwuWBP0"));
+        String id = "ChIJRXeieDsnAxURf3ycN2-QRDA";
 
-        for (String arg : toSend.keySet()){
-            ServerApi.getInstance().setAccess("ChIJS_zBNNbXAhUR_A-4iwuWBP0",
+        /* givat ram hebrew university id*/
+        ServerApi.getInstance().createLocation(new Business(id));
+        ServerApi.getInstance().setAccess(id, toSend);
+
+
+        /*for (String arg : toSend.keySet()){
+            ServerApi.getInstance().setAccess(id,
                     arg, toSend.get(arg));
-        }
+        }*/
 
 
     }

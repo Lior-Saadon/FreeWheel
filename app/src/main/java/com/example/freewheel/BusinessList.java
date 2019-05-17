@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BusinessList extends Fragment implements ImageButton.OnClickListener {
@@ -82,22 +83,12 @@ public class BusinessList extends Fragment implements ImageButton.OnClickListene
             @Override public void onItemClick(GoogleInfo business) {
 
                 BusinessPageFragment.businessToDisplay = business;
-                loadBusinessPageFragment();
+                ServerApi.getInstance().getAccessibilities(business, getFragmentManager());
+                //
             }
         });
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-    }
-
-
-
-
-    private void loadBusinessPageFragment() {
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.addToBackStack("ListView");  // enables to press "return" and go back to the list view
-        transaction.replace(R.id.main_fragment, new BusinessPageFragment());
-        transaction.commit();
     }
 
 

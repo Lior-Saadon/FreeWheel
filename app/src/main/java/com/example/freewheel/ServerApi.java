@@ -1,6 +1,8 @@
 package com.example.freewheel;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,6 +74,23 @@ public class ServerApi {
 
     }
 
+    public void setAccess(String id, HashMap<String, Object> access)
+    {
+        db.collection(LOC_LIB_NAME).document(id).update("access", access).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("UPDATE_SUCCESS");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("UPDATE_FAILED");
+                    }
+                });;
+    }
+
+
 
     public void setAccess(String busid, final String key, final Object val){
 
@@ -106,37 +125,31 @@ public class ServerApi {
 
     }
 
-    public HashMap<String, Object> getAccessibilities(String busid){
-        final DocumentReference busRef = db.collection(LOC_LIB_NAME).document(busid);
-
-        final HashMap<String, Object> newMap = new HashMap<>();
-        db.runTransaction(new Transaction.Function<Void>() {
+    public void getAccessibilities(final GoogleInfo business,final FragmentManager manager){
+        final DocumentReference busRef = db.collection(LOC_LIB_NAME).document(business.getId());
+        busRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(busRef);
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    DocumentSnapshot document = task.getResult();
+                    if(document != null && document.exists())
+                    {
+                        BusinessPageFragment.businessToDisplay = business;
+                        BusinessPageFragment.atts = (HashMap<String, Object>)document.getData().get("access");
 
-                // Note: this could be done without a transaction
-                //       by updating the population using FieldValue.increment()
-                newMap.putAll((HashMap<String, Object>)snapshot.get("access"));
-
-
-                // Success
-                return null;
-            }
-        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "Transaction success!");
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Transaction failure.", e);
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        transaction.addToBackStack("ListView");  // enables to press "return" and go back to the list view
+                        transaction.replace(R.id.main_fragment, new BusinessPageFragment());
+                        transaction.commit();
                     }
-                });
-
-        return newMap;
+                    else
+                    {
+                        System.out.println(business.getId());
+                    }
+                }
+            }
+        });
     }
 
     public ArrayList<Comment> getComments(String busid){

@@ -58,7 +58,8 @@
                         android:inputType="text"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="15sp"
-                        android:layout_toLeftOf="@+id/search"/>
+                        android:layout_toLeftOf="@+id/search"
+                        android:layout_marginStart="10dp"/>
 
 
                 </RelativeLayout>

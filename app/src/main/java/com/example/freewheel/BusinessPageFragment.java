@@ -20,6 +20,7 @@ import java.util.HashMap;
 public class BusinessPageFragment extends Fragment {
 
     public static GoogleInfo businessToDisplay = null;
+    public static HashMap<String, Object> atts = null;
 
     private ImageView logo;
     private TextView name, address, stairs, doors;
@@ -59,7 +60,6 @@ public class BusinessPageFragment extends Fragment {
 
 
     private void setAccessAtts(){
-        HashMap<String, Object> atts = ServerApi.getInstance().getAccessibilities(id);
         if ((Boolean)atts.get("Standard")){
             standard.setImageResource(R.drawable.v);
         } else {
@@ -82,8 +82,8 @@ public class BusinessPageFragment extends Fragment {
         } else {
             elav.setImageResource(R.drawable.x);
         }
-        doors.setText((String)atts.get("Doors width") + "cm");
-        stairs.setText((String)atts.get("Number of Stairs"));
+        doors.setText(((Long)atts.get("Doors width") + "cm").toString());
+        stairs.setText(((Long)atts.get("Number of Stairs")).toString());
 
 
 
